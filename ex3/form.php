@@ -79,7 +79,7 @@
                             </div>
                         </div>
                         <div>
-                            <select name="languages" class="form-select form-select-sm mb-3" multiple>
+                            <select name="languages[]" class="form-select form-select-sm mb-3" multiple>
                                 <option value="1">Java</option>
                                 <option value="2">Python</option>
                                 <option value="3">JavaScript</option>
