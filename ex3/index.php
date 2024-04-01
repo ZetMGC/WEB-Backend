@@ -57,7 +57,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors = TRUE;
 }
 
-if (empty($_POST['gender']) || ($_POST['gender']!="female" && $_POST['gender']!='male')) {
+if (empty($_POST['gender']) || ($_POST['gender']!="f" && $_POST['gender']!='m')) {
     print('Заполните пол.<br/>');
     print($_POST['gender']);
     $errors = TRUE;

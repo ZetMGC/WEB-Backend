@@ -52,13 +52,13 @@
                             <label class="form-label">Выберите пол:</label>
                             <div class="d-flex">
                                 <div class="form-check mr-3">
-                                    <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+                                    <input class="form-check-input" type="radio" name="gender" id="m" value="male">
                                     <label class="form-check-label" for="male">
                                         Мужской
                                     </label>
                                 </div>
                                 <div class="form-check mr-3">
-                                    <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                                    <input class="form-check-input" type="radio" name="gender" id="f" value="female">
                                     <label class="form-check-label" for="female">
                                         Женский
                                     </label>
