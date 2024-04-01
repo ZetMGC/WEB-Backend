@@ -20,62 +20,57 @@ $date = $_POST['date'];
 $gen = $_POST['gender'];
 $bio = $_POST['bio'];
 
-$errors = FALSE;
+$errors = array();
 
 if (empty($_POST['fio'])) {
-    print('Заполните имя.<br/>');
-    $errors = TRUE;
+    $errors[] = 'Заполните имя.';
 }
 if (!preg_match('/^[a-zA-Zа-яА-Я\s]{1,150}$/u', $fio)) {
-    print('ФИО некорректно.');
-    $errors = TRUE;
+    $errors[] = 'ФИО некорректно.';
 }
 $date_format = 'd.m.Y';
 $date_timestamp = strtotime($_POST['date']);
 $date_valid = date($date_format, $date_timestamp) === $_POST['date'];
 if (empty($_POST['date']) || $date_valid){
-    print('Дата некорректна<br/>');
-    $errors = TRUE;
+    $errors[] = 'Дата некорректна';
 }
 
 if (empty($_POST['tel'])) {
-    print('Заполните телефон.<br/>');
-    $errors = TRUE;
+    $errors[] = 'Заполните телефон.';
 }
 $tel_length = strlen($_POST['tel']);
 if (!($tel_length == 11 || $tel_length == 12)) {
-    print('Телефон некорректный.');
-    $errors = TRUE;
+    $errors[] = 'Телефон некорректный.';
 }
 
 if (empty($_POST['email'])) {
-    print('Заполните почту.<br/>');
-    $errors = TRUE;
+    $errors[] = 'Заполните почту.<br/>';
 }
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    print('Почта некорректна.');
-    $errors = TRUE;
+    $errors[] = 'Почта некорректна.';
 }
 
 if (empty($_POST['gender']) || ($_POST['gender']!="f" && $_POST['gender']!='m')) {
-    print('Заполните пол.<br/>');
-    print($_POST['gender']);
-    $errors = TRUE;
+    $errors[] = 'Заполните пол.';
 }
 if (empty($_POST['languages'])) {
-    print('Выберите языки программирования.<br/>');
-    $errors = TRUE;
+    $errors[] = 'Выберите языки программирования.';
 }
 if (empty($_POST['bio'])) {
-    print('Заполните биографию.<br/>');
-    $errors = TRUE;
+    $errors[] = 'Заполните биографию.';
 }
 if (!preg_match('/^[a-zA-Zа-яА-Яе0-9,.!? ]+$/', $bio)) {
-    print('Биография содержит недопустимые символы.<br/>');
-    $errors = TRUE;
+    $errors[] = 'Биография содержит недопустимые символы.';
 }
 
-if ($errors) {
+if (!empty($errors)) {
+    echo "<div style='border: 1px solid #ccc; background-color: #f9f9f9; padding: 10px; margin-bottom: 10px;'>";
+    echo "<ul style='list-style-type: none; padding-left: 0;'>";
+    foreach ($errors as $error) {
+        echo "<li style='color: red;'>$error</li>";
+    }
+    echo "</ul>";
+    echo "</div>";
     exit();
 }
 
@@ -106,7 +101,7 @@ try {
         $stmt->execute();
     };
 
-    print('Спасибо, результаты сохранены.<br/>'); }
+    echo "<script>alert('Спасибо, результаты сохранены.');</script>"; }
 
 catch (PDOException $e) {
     echo $e->getMessage();
