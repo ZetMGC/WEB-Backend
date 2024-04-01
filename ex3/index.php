@@ -94,14 +94,15 @@ foreach ($_POST['languages'] as $language) {
     }
 }
 try {
-    $stmt = $db->prepare("INSERT INTO application (names,tel,email,dateB,gender,biography)" . "VALUES (:fio,:tel,:email,:date,:gen,:bio)");
+    $stmt = $db->prepare("INSERT INTO info (names,tel,email,dateB,gender,bio)" . "VALUES (:fio,:tel,:email,:date,:gender,:bio)");
     $stmt->execute(array('fio' => $fio, 'tel' => $tel, 'email' => $email, 'date' => $date, 'gen' => $gen, 'bio' => $bio));
-    $applicationId = $db->lastInsertId();
+    $info_id = $db->lastInsertId();
 
     foreach ($_POST['languages'] as $language) {
-        $stmt = $db->prepare("INSERT INTO application_language (id_app, id_lang) VALUES (:applicationId, :languageId)");
-        $stmt->bindParam(':applicationId', $applicationId);
-        $stmt->bindParam(':languageId', $language);
+        $stmt = $db->prepare("INSERT INTO info_language (info_id, language_id) VALUES (:info_id, :language_id)");
+        $stmt->bindParam(':info_id', $info_id);
+        $stmt->bindParam(':language_id', $language);
+        $stmt->bindParam(':language_id', $language);
         $stmt->execute();
     };
 
