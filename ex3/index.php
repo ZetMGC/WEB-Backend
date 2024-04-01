@@ -85,7 +85,7 @@ $db = new PDO('mysql:host=127.0.0.1;dbname=u67446', $user, $pass, array(PDO::MYS
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 foreach ($_POST['languages'] as $language) {
-    $stmt = $db->prepare("SELECT id FROM languages WHERE id= :id");
+    $stmt = $db->prepare("SELECT id FROM programming_languages WHERE id= :id");
     $stmt->bindParam(':id', $language);
     $stmt->execute();
     if ($stmt->rowCount() == 0) {
