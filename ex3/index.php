@@ -94,7 +94,7 @@ foreach ($_POST['languages'] as $language) {
     }
 }
 try {
-    $stmt = $db->prepare("INSERT INTO info (names,tel,email,dateB,gender,bio)" . "VALUES (:fio,:tel,:email,:date,:gender,:bio)");
+    $stmt = $db->prepare("INSERT INTO info (names,tel,email,date,gender,bio)" . "VALUES (:fio,:tel,:email,:date,:gender,:bio)");
     $stmt->execute(array('fio' => $fio, 'tel' => $tel, 'email' => $email, 'date' => $date, 'gen' => $gen, 'bio' => $bio));
     $info_id = $db->lastInsertId();
 
