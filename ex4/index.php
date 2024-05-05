@@ -113,14 +113,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 
     try {
-        $stmt = $db->prepare("INSERT INTO application (names,tel,email,dateB,gender,biography) VALUES (:fio,:tel,:email,:date,:gen,:bio)");
+        $stmt = $db->prepare("INSERT INTO info (names,tel,email,dateB,gender,biography) VALUES (:fio,:tel,:email,:date,:gen,:bio)");
         $stmt->execute(array('fio' => $_POST['fio'], 'tel' => $_POST['tel'], 'email' => $_POST['email'], 'date' => $_POST['date'], 'gen' => $_POST['gen'], 'bio' => $_POST['bio']));
-        $applicationId = $db->lastInsertId();
+        $info_id = $db->lastInsertId();
 
         foreach ($_POST['languages'] as $language) {
-            $stmt = $db->prepare("INSERT INTO application_language (id_app, id_lang) VALUES (:applicationId, :languageId)");
-            $stmt->bindParam(':applicationId', $applicationId);
-            $stmt->bindParam(':languageId', $language);
+            $stmt = $db->prepare("INSERT INTO info_language (id_app, id_lang) VALUES (:info_id, :language_id)");
+            $stmt->bindParam(':info_id', $info_id);
+            $stmt->bindParam(':language_id', $language);
             $stmt->execute();
         }
 
