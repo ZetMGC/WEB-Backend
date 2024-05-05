@@ -26,6 +26,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         'bio_value' => 'bio_value_error'
     ];
 
+    $errorMessages = [
+        'fio' => 'Заполните имя.',
+        'tel' => 'Заполните номер телефона.',
+        'email' => 'Заполните почту.',
+        'bio' => 'Заполните биографию.',
+        'date' => 'Заполните дату.',
+        'gen' => 'Введите пол',
+        'symbolfio' => 'ФИО содержит недопустимые символы.',
+        'symboltel' => 'Укажите номер телефона в формате +7 (XXX) XXX-XX-XX.',
+        'languages' => 'Выберите языки.',
+        'languages_unknown' => 'Ошибка при добавлении языка.',
+        'date_value' => 'Заполните дату в формате d.m.Y.',
+        'bio_value' => 'Биография содержит недопустимые символы.'
+    ];
+
     foreach ($errorFlags as $key => $value) {
         $errors[$key] = !empty($_COOKIE[$value]);
         if ($errors[$key]) {
@@ -45,20 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     include('form.php');
 } else {
     $errors = FALSE;
-    $errorMessages = [
-        'fio' => 'Заполните имя.',
-        'tel' => 'Заполните номер телефона.',
-        'email' => 'Заполните почту.',
-        'bio' => 'Заполните биографию.',
-        'date' => 'Заполните дату.',
-        'gen' => 'Введите пол',
-        'symbolfio' => 'ФИО содержит недопустимые символы.',
-        'symboltel' => 'Укажите номер телефона в формате +7 (XXX) XXX-XX-XX.',
-        'languages' => 'Выберите языки.',
-        'languages_unknown' => 'Ошибка при добавлении языка.',
-        'date_value' => 'Заполните дату в формате d.m.Y.',
-        'bio_value' => 'Биография содержит недопустимые символы.'
-    ];
 
     $valueFlags = ['fio', 'tel', 'email', 'bio', 'date', 'gen'];
     foreach ($valueFlags as $flag) {
