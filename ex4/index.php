@@ -27,9 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     ];
 
     foreach ($errorFlags as $key => $value) {
+        $errors[$key] = !empty($_COOKIE[$value]);
         if ($errors[$key]) {
             setcookie($value, '', 100000);
-            $messages[] = $errorMessages[$key];
+            // Используем готовые сообщения об ошибках из массива $errorMessages
+            $messages[] = '<div class="error">' . $errorMessages[$key] . '</div>';
         }
     }
 
