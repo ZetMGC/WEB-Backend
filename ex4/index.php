@@ -27,10 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     ];
 
     foreach ($errorFlags as $key => $value) {
-        $errors[$key] = !empty($_COOKIE[$value]);
         if ($errors[$key]) {
             setcookie($value, '', 100000);
-            $messages[] = '<div class="error">Ошибка в поле ' . ucfirst($key) . '.</div>';
+            $messages[] = $errorMessages[$key];
         }
     }
 

@@ -75,7 +75,6 @@ if (!empty($messages)) {
                     <option value="9" <?php echo is_array($languages) && in_array('9', $languages) ? 'selected' : ''; ?>>Clojure</option>
                     <option value="10" <?php echo is_array($languages) && in_array('10', $languages) ? 'selected' : ''; ?>>Prolog</option>
                     <option value="11" <?php echo is_array($languages) && in_array('11', $languages) ? 'selected' : ''; ?>>Scala</option>
-                    <option value="12" <?php echo is_array($languages) && in_array('12', $languages) ? 'selected' : ''; ?>>Несуществующий для теста</option>
                 </select> </label><br />
 
             <label>
