@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $errors = TRUE;
     } else {
         foreach ($_POST['languages'] as $language) {
-            $stmt = $db->prepare("SELECT id FROM languages WHERE id= :id");
+            $stmt = $db->prepare("SELECT id FROM info_language WHERE id= :id");
             $stmt->bindParam(':id', $language);
             $stmt->execute();
             if ($stmt->rowCount() == 0) {
