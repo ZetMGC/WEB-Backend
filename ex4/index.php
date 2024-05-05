@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $info_id = $db->lastInsertId();
 
         foreach ($_POST['languages'] as $language) {
-            $stmt = $db->prepare("INSERT INTO info_language (id_app, id_lang) VALUES (:info_id, :language_id)");
+            $stmt = $db->prepare("INSERT INTO info_language (info_id, language_id) VALUES (:info_id, :language_id)");
             $stmt->bindParam(':info_id', $info_id);
             $stmt->bindParam(':language_id', $language);
             $stmt->execute();
