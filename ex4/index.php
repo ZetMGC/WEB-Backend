@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         } elseif ($flag === 'fio' && !preg_match("/^[а-я А-Я]+$/u", $_POST[$flag])) {
             setcookie('symbolfio_error', '1', time() + 24 * 60 * 60);
             $errors = TRUE;
-        } elseif ($flag === 'tel' && !preg_match('/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/', $_POST[$flag])) {
+        } elseif ($flag === 'tel' && !preg_match('/^\+\d{11}$/', $_POST[$flag])) {
             setcookie('symboltel_error', '1', time() + 24 * 60 * 60);
             $errors = TRUE;
         } elseif ($flag === 'email' && !preg_match("/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/", $_POST[$flag])) {
