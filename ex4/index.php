@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 
     try {
-        $stmt = $db->prepare("INSERT INTO info (names,tel,email,dateB,gender,biography) VALUES (:fio,:tel,:email,:date,:gen,:bio)");
+        $stmt = $db->prepare("INSERT INTO info (fio,tel,email,date,gender,bio) VALUES (:fio,:tel,:email,:date,:gen,:bio)");
         $stmt->execute(array('fio' => $_POST['fio'], 'tel' => $_POST['tel'], 'email' => $_POST['email'], 'date' => $_POST['date'], 'gen' => $_POST['gen'], 'bio' => $_POST['bio']));
         $info_id = $db->lastInsertId();
 

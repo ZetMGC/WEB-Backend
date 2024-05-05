@@ -29,7 +29,7 @@ if (!empty($messages)) {
             } ?> value="<?php print $values['fio']; ?>"> </label><br>
         <label>
             Номер телефона :<br />
-            <input name="tel" <?php if ($errorFlags['tel'] || $errorFlags['symboltel_error']) {
+            <input name="tel" <?php if ($errorFlags['tel'] || $errorFlags['symboltel']) {
                 print 'class="error"';
             } ?> value="<?php print $values['tel']; ?>"> </label><br>
         <label>
