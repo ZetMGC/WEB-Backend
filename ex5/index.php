@@ -139,10 +139,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             exit();
         }
 
+        $login = uniqid();
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $pass = '';
+        $length = 10;
+        for ($i = 0; $i < $length; $i++) {
+            $pass .= $characters[rand(0, $charactersLength - 1)];
+        }
+        $passX = md5($pass);
+        setcookie('login', $login);
+        setcookie('pass', $pass);
+        $db = new PDO('mysql:host=127.0.0.1;dbname=u67446', $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+        try {
+            $stmt = $db->prepare("INSERT INTO application (names,tel,email,dateB,gender,biography,login,pass)" . "VALUES (:fio,:tel,:email,:date,:gen,:bio,:login,:pass)");
+            $stmt->execute(array(
+                'fio' => $_POST['fio'], 'tel' => $_POST['tel'], 'email' => $_POST['email'], 'date' => $_POST['date'], 'gen' => $_POST['gen'], 'bio' => $_POST['bio'],
+                'login' => $login, 'pass' => $passX
+            ));
+            $applicationId = $db->lastInsertId();
+
+            foreach ($_POST['languages'] as $language) {
+                $stmt = $db->prepare("INSERT INTO application_language (id_app, id_lang) VALUES (:applicationId, :languageId)");
+                $stmt->bindParam(':applicationId', $applicationId);
+                $stmt->bindParam(':languageId', $language);
+                $stmt->execute();
+            };
+
+            print('Спасибо, результаты сохранены.<br/>');
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+
         setcookie('save', '1');
         header('Location: index.php');
-    } else {
-        header('Location: login.php');
     }
 }
 ?>
