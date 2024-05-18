@@ -246,19 +246,19 @@ else {
         $passForm = $_SESSION['pass'];
         $user_id = $db->lastInsertId();
         try {
-            $stmt = $db->prepare("SELECT id FROM application WHERE id = ?");
+            $stmt = $db->prepare("SELECT id FROM info WHERE id = ?");
             $stmt->execute([$_SESSION['uid']]);
 
             $row = $stmt->fetch();
             if ($row) {
                 $applicationId = $row['id'];
                 // Удалить текущие языки программирования для данной заявки
-                $deleteStmt = $db->prepare("DELETE FROM application_language WHERE id_app = :applicationId");
+                $deleteStmt = $db->prepare("DELETE FROM info_language WHERE info_id = :applicationId");
                 $deleteStmt->bindParam(':applicationId', $applicationId);
                 $deleteStmt->execute();
                 // Затем вставить новые языки программирования
                 foreach ($languages as $languageId) {
-                    $insertStmt = $db->prepare("INSERT INTO application_language (id_app, id_lang) VALUES (:applicationId, :languageId)");
+                    $insertStmt = $db->prepare("INSERT INTO info_language (info_id, language_id) VALUES (:applicationId, :languageId)");
                     $insertStmt->bindParam(':applicationId', $applicationId);
                     $insertStmt->bindParam(':languageId', $languageId);
                     $insertStmt->execute();
@@ -266,7 +266,7 @@ else {
             }
 
 
-            $stmt = $db->prepare("UPDATE application SET names = :fio, tel = :tel, email = :email, dateB = :date, gender = :gen, biography = :bio  WHERE id = :id");
+            $stmt = $db->prepare("UPDATE info SET fio = :fio, tel = :tel, email = :email, date = :date, gender = :gen, bio = :bio  WHERE id = :id");
 
             $stmt->bindParam(':id', $_SESSION['id']);
             $stmt->bindParam(':fio', $_POST['fio']);
