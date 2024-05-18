@@ -1,4 +1,5 @@
 <?php
+global $user, $pass;
 header('Content-Type: text/html; charset=UTF-8');
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
