@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $log = $_SESSION['login'];
             $passForm = $_SESSION['pass'];
 
-            $stmt = $db->prepare("SELECT names, tel, email, dateB, gender, biography FROM application WHERE id = ?");
+            $stmt = $db->prepare("SELECT fio, tel, email, date, gender, bio FROM info WHERE id = ?");
             $stmt->execute([$_SESSION['uid']]);
 
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $values['gen'] = $row['gender'];
             $values['bio'] = $row['biography'];
             $values['date'] = $row['dateB'];
-            $stmt1 = $db->prepare("SELECT id_lang FROM application_language WHERE id_app = ?");
+            $stmt1 = $db->prepare("SELECT language_id FROM info_language WHERE info_id = ?");
             $stmt1->execute([$_SESSION['uid']]);
 
 
