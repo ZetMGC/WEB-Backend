@@ -10,12 +10,6 @@
 </head>
 
 <body>
-
-
-<header>
-    <img id="logo" src="logo.jpg" alt="Наш лого" />
-    <h1>Задание 5</h1>
-</header>
 <?php
 if (!empty($messages)) {
     print('<div id="messages">');

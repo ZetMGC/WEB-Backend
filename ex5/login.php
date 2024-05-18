@@ -28,11 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 </head>
 
 <body>
-<header>
-    <img id="logo" src="logo.jpg" alt="Наш лого" />
-    <h1>Задание 5</h1>
-</header>
-
 <div class="form">
     <h2>Форма входа</h2>
     <form action="" method="POST" accept-charset="UTF-8" class="login">
@@ -48,13 +43,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <?php
 } else {
     include '../4/p.php';
-    $db = new PDO('mysql:host=127.0.0.1;dbname=u67314', $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+    $db = new PDO('mysql:host=127.0.0.1;dbname=u67446', $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $passLogin = $_POST['pass'];
     $logLogin = $_POST['login'];
 
-    $data = $db->prepare("SELECT id, pass FROM application where login = ?");
+    $data = $db->prepare("SELECT id, pass FROM info where login = ?");
 
     $data->execute([$logLogin]);
     $pas = $data->fetch(PDO::FETCH_ASSOC);
