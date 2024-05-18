@@ -146,7 +146,7 @@ else {
     }
     setcookie('fio_value', $_POST['fio'], time() + 30 * 24 * 60 * 60);
 
-    if (!preg_match('/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/', $_POST['tel'])) {
+    if (!preg_match('/^\+\d{11}$/', $_POST['tel'])) {
         setcookie('symboltel_error', '1', time() + 24 * 60 * 60);
         $errors = TRUE;
     } else if (empty($_POST['tel'])) {
