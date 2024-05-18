@@ -1,67 +1,79 @@
-<?php
-// Устанавливаем заголовок страницы
-header('Content-Type: text/html; charset=UTF-8');
+<!DOCTYPE html>
 
-// Начинаем сессию
+<?php
+
+header('Content-Type: text/html; charset=UTF-8');
 session_start();
 
-// Подключаемся к базе данных (параметры подключения необходимо заменить на свои)
-include("config.php");
-
-// Если метод запроса POST
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Получаем данные из формы
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    try {
-        // Подключаемся к базе данных
-        $db = new PDO('mysql:host=127.0.0.1;dbname=u67314', $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        // Подготовка запроса для получения пользователя с указанным логином
-        $stmt = $db->prepare("SELECT * FROM users WHERE username = ?");
-        $stmt->execute([$username]);
-
-        // Получаем данные пользователя
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Проверяем существует ли пользователь с таким логином и совпадает ли пароль
-        if ($user && password_verify($password, $user['password'])) {
-            // Если пользователь существует и пароль верный, сохраняем логин в сессии
-            $_SESSION['login'] = $username;
-            // Перенаправляем пользователя на главную страницу
-            header('Location: index.php');
-            exit;
-        } else {
-            // Если логин или пароль неверны, выводим сообщение об ошибке
-            echo "Неправильный логин или пароль.";
-        }
-    } catch (PDOException $e) {
-        // В случае ошибки выводим сообщение об ошибке
-        echo "Ошибка: " . $e->getMessage();
-    }
+// Проверяем, была ли уже начата сессия
+if (!empty($_SESSION['login'])) {
+    // Если есть логин в сессии, то пользователь уже авторизован.
+    // TODO: Сделать выход (окончание сессии вызовом session_destroy()
+    //при нажатии на кнопку Выход).
+    session_destroy();
+    // Делаем перенаправление на форму.
+    header('Location: ./');
 }
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 ?>
 
-<!DOCTYPE html>
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>Задание 5</title>
 </head>
 
 <body>
-<h1>Вход</h1>
-<form action="login.php" method="post">
-    <label for="username">Логин:</label><br>
-    <input type="text" id="username" name="username"><br>
-    <label for="password">Пароль:</label><br>
-    <input type="password" id="password" name="password"><br><br>
-    <input type="submit" value="Войти">
-</form>
+<header>
+    <img id="logo" src="logo.jpg" alt="Наш лого" />
+    <h1>Задание 5</h1>
+</header>
+
+<div class="form">
+    <h2>Форма входа</h2>
+    <form action="" method="POST" accept-charset="UTF-8" class="login">
+        <input name="login" />
+        <input name="pass" />
+        <input type="submit" value="Войти" />
+    </form>
+</div>
 </body>
 
 </html>
+
+<?php
+} else {
+    include '../4/p.php';
+    $db = new PDO('mysql:host=127.0.0.1;dbname=u67314', $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $passLogin = $_POST['pass'];
+    $logLogin = $_POST['login'];
+
+    $data = $db->prepare("SELECT id, pass FROM application where login = ?");
+
+    $data->execute([$logLogin]);
+    $pas = $data->fetch(PDO::FETCH_ASSOC);
+    //print_r($pas, true);
+    if (!$pas) {
+        exit("Логин не существует");
+    }
+    if ($pas["pass"] != md5($passLogin)) {
+        exit("Неверный пароль");
+    }
+    $_SESSION['login'] =  $logLogin;
+    $_SESSION['pass'] =  $passLogin;
+    // Здесь необходимо получить id пользователя из базы данных и установить его в сессию
+    $_SESSION['uid'] = $pas['id'];
+    print( $_SESSION['login']);
+    print( $_SESSION['pass']);
+    print( $_SESSION['uid']);
+    // После вывода сообщения выполним перенаправление
+    header('Location: ./');
+    exit();
+}
+?>

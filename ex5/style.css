@@ -3,7 +3,9 @@
 }
 
 tr:nth-child(odd) {
+
     background-color: #C9E4F6;
+
 }
 
 tr:nth-child(even) {
@@ -15,18 +17,9 @@ tr:nth-child(even) {
     float:left; width:100px; height:100px;
 }
 
-header{
-    background-color:#E6E6FA; padding: 10px; height:120px;
-}
-header h1 {
-    padding: 25px;
-    margin-left: 100px;
-}
-
 footer{
 
-    width:100%; background-color:#ccc; padding: 10px; margin: 10px; background:  #E6E6FA;
-
+    width:100%; background-color: #d99b65; padding: 10px; margin: 10px; background:  #E6E6FA;
 }
 div {
     max-width:960px; margin: 0 auto ; margin-top:20px; padding:10px;
@@ -34,7 +27,10 @@ div {
 }
 .content, .form {
     width: 40%;
-    background-color: #FFF5EE;
+    background-color: #61efd0;
+    border-radius: 15px;
+    box-shadow: 2px 3px 3px 1px;
 }
 
 body {  background-color: #fceae8 !important ;  }
+
