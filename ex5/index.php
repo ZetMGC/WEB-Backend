@@ -279,6 +279,7 @@ else {
             $stmt->execute();
 
 
+
         } catch (PDOException $e) {
             echo $e->getMessage();
             exit();
@@ -309,8 +310,8 @@ else {
 
             foreach ($_POST['languages'] as $language) {
                 $stmt = $db->prepare("INSERT INTO info_language (info_id, language_id) VALUES (:info_id, :language_id)");
-                $stmt->bindParam(':applicationId', $applicationId);
-                $stmt->bindParam(':languageId', $language);
+                $stmt->bindParam(':info_id', $applicationId);
+                $stmt->bindParam(':language_id', $language);
                 $stmt->execute();
             };
 
