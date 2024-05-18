@@ -110,19 +110,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $stmt->execute([$_SESSION['uid']]);
 
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $values['fio'] =  strip_tags($row['names']);
+            $values['fio'] =  strip_tags($row['fio']);
             $values['email'] =  strip_tags($row['email']);
             $values['tel'] =  strip_tags($row['tel']);
             $values['gen'] = $row['gender'];
-            $values['bio'] = $row['biography'];
-            $values['date'] = $row['dateB'];
+            $values['bio'] = $row['bio'];
+            $values['date'] = $row['date'];
             $stmt1 = $db->prepare("SELECT language_id FROM info_language WHERE info_id = ?");
             $stmt1->execute([$_SESSION['uid']]);
 
 
             $languages = array();
             while ($row = $stmt1->fetch(PDO::FETCH_ASSOC)) {
-                $languages[] = $row['id_lang'];
+                $languages[] = $row['language_id'];
             }
 
 
@@ -238,7 +238,7 @@ else {
         !empty($_COOKIE[session_name()]) &&
         session_start() && !empty($_SESSION['login'])
     ) {
-        include '../4/p.php';
+        include 'config.php';
 
         $db = new PDO('mysql:host=127.0.0.1;dbname=u67314', $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
