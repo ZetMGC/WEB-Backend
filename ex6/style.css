@@ -1,0 +1,36 @@
+.error {
+    border: 2px solid red;
+}
+
+tr:nth-child(odd) {
+
+    background-color: #C9E4F6;
+
+}
+
+tr:nth-child(even) {
+
+    background-color: #B4DAF2;
+}
+
+#logo {
+    float:left; width:100px; height:100px;
+}
+
+footer{
+
+    width:100%; background-color: #d99b65; padding: 10px; margin: 10px; background:  #E6E6FA;
+}
+div {
+    max-width:960px; margin: 0 auto ; margin-top:20px; padding:10px;
+
+}
+.content, .form {
+    width: 40%;
+    background-color: #61efd0;
+    border-radius: 15px;
+    box-shadow: 2px 3px 3px 1px;
+}
+
+body {  background-color: #fceae8 !important ;  }
+
