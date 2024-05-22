@@ -2,7 +2,6 @@
 global $user, $pass;
 header('Content-Type: text/html; charset=UTF-8');
 include 'func.php';
-print(md5(`123`));
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $messages = array();

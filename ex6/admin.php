@@ -6,7 +6,7 @@
 <?php
 include ('func.php');
 
-o=
+
 if (empty($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_PW'])) {
     header('HTTP/1.1 401 Unauthorized');
     header('WWW-Authenticate: Basic realm="My site"');
