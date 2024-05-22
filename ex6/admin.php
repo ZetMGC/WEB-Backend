@@ -86,10 +86,10 @@ if (!$admin || !password_verify($password, $admin['admin_pass'])) {
         }      ?>
 
     </table>   <?php
-    $sql = "SELECT l.title AS language, COUNT(il.language_id) AS count_users
-            FROM languages l
+    $sql = "SELECT l.programming_language AS language, COUNT(il.language_id) AS count_users
+            FROM programming_languages l
             LEFT JOIN info_language il ON l.id = il.language_id
-            GROUP BY l.title";
+            GROUP BY l.programming_language";
 
     $stmt = $db->prepare($sql);
     $stmt->execute();
