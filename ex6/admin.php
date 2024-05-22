@@ -42,11 +42,6 @@ if (!$admin || !password_verify($password, $admin['admin_pass'])) {
 </head>
 
 <body>
-<header>
-    <img id="logo" src="logo.jpg" alt="Наш лого" />
-    <h1>Задание 6</h1>
-</header>
-<body>
 <div class="form" style="width: 70%";>
     <h2>Данные о пользователях</h2>
     <table border="1">
@@ -66,8 +61,8 @@ if (!$admin || !password_verify($password, $admin['admin_pass'])) {
 
         $sql = "SELECT i.id, i.fio, i.tel, i.email, i.date, i.gender, i.bio, GROUP_CONCAT(l.title) AS languages
                 FROM info i
-                LEFT JOIN info_language il ON a.id = il.info_id
-                LEFT JOIN languages l ON il.language_id = l.id GROUP BY a.id";
+                LEFT JOIN info_language il ON i.id = il.info_id
+                LEFT JOIN languages l ON il.language_id = l.id GROUP BY i.id";
         $stmt = $db->query($sql);
 
 

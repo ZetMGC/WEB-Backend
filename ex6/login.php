@@ -1,73 +1,50 @@
-<!DOCTYPE html>
-
 <?php
+include ('func.php');
 
-header('Content-Type: text/html; charset=UTF-8');
-session_start();
-
-// Проверяем, была ли уже начата сессия
-if (!empty($_SESSION['login'])) {
-    // Если есть логин в сессии, то пользователь уже авторизован.
-    // TODO: Сделать выход (окончание сессии вызовом session_destroy()
-    //при нажатии на кнопку Выход).
-    session_destroy();
-    // Делаем перенаправление на форму.
-    header('Location: ./');
-}
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-?>
-
-<html lang="ru">
-
-<head>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <title>Задание 5</title>
-</head>
-
-<body>
-<div class="form">
-    <h2>Форма входа</h2>
-    <form action="" method="POST" accept-charset="UTF-8" class="login">
-        <input name="login" />
-        <input name="pass" />
-        <input type="submit" value="Войти" />
-    </form>
-</div>
-</body>
-
-</html>
-
-<?php
+    // Отображение формы входа
+    ?>
+    <!DOCTYPE html>
+    <html lang="ru">
+    <head>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <title>Задание 6</title>
+    </head>
+    <body>
+    <div class="form">
+        <h2>Форма входа</h2>
+        <form action="" method="POST" accept-charset="UTF-8" class="login">
+            <input name="login" />
+            <input name="pass" />
+            <input type="submit" value="Войти" />
+        </form>
+    </div>
+    </body>
+    </html>
+    <?php
 } else {
-    include 'config.php';
-    $db = new PDO('mysql:host=127.0.0.1;dbname=u67446', $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // Проверка наличия данных в полях логина и пароля
+    if (empty($_POST['login']) || empty($_POST['pass'])) {
+        exit("Введите логин и пароль");
+    }
 
-    $passLogin = $_POST['pass'];
+// Обработка входа
+    $db = SetDataBaseConnection();
     $logLogin = $_POST['login'];
+    $passLogin = $_POST['pass'];
 
-    $data = $db->prepare("SELECT id, pass FROM info where login = ?");
+    $stmt = $db->prepare("SELECT id, pass FROM info WHERE login = ?");
+    $stmt->execute([$logLogin]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $data->execute([$logLogin]);
-    $pas = $data->fetch(PDO::FETCH_ASSOC);
-    //print_r($pas, true);
-    if (!$pas) {
-        exit("Логин не существует");
+    if (!$user) {
+        exit("Логин или email не существует");
     }
-    if ($pas["pass"] != md5($passLogin)) {
-        exit("Неверный пароль");
-    }
-    $_SESSION['login'] =  $logLogin;
-    $_SESSION['pass'] =  $passLogin;
-    // Здесь необходимо получить id пользователя из базы данных и установить его в сессию
-    $_SESSION['uid'] = $pas['id'];
-    print( $_SESSION['login']);
-    print( $_SESSION['pass']);
-    print( $_SESSION['uid']);
-    // После вывода сообщения выполним перенаправление
+
+    startSession($logLogin, $passLogin, $user['id']);
     header('Location: ./');
     exit();
 }
