@@ -89,14 +89,7 @@ if (!empty($messages)) {
 
             <div class="container">
                 <input class="btn btn-outline-info" type="submit" value="Сохранить" />
-                <?php
-                //session_start();
-                if(isset($_SESSION['login'])) {
-                    echo '<a href="logout.php" class="btn btn-danger type="reset"">Выйти</a>';
-                } else {
-                    echo '<a href="login.php" class="btn btn-outline-info">Войти</a>';
-                }
-                ?>
+                <?php include('log_btns.php'); ?>
             </div>
     </form>
 </div>
