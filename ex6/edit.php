@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             while ($row_lang = $stmt_lang->fetch(PDO::FETCH_ASSOC)) {
                 $languages[] = $row_lang['language_id'];
             }
-            $errors = get_error();
+            $errors = GetError();
             if ($errors['fio']) {
                 setcookie('fio_error', '', 100000);
                 $messages[] = '<div class="error">Заполните имя.</div>';
@@ -75,9 +75,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             }
 
             $values = array();
-            $values['fio'] =  strip_tags($row['fio']);
-            $values['email'] =  strip_tags($row['email']);
-            $values['tel'] =  strip_tags($row['tel']);
+            $values['fio'] = strip_tags($row['fio']);
+            $values['email'] = strip_tags($row['email']);
+            $values['tel'] = strip_tags($row['tel']);
             $values['gen'] = $row['gender'];
             $values['bio'] = $row['bio'];
             $values['date'] = $row['date'];
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <?php
 }
 else {
-    $errors = valid();
+    $errors = Validation();
     if ($errors) {
         $id = $_POST['id'];
         header('Location: ' . $_SERVER['PHP_SELF'] . '?id=' . $id);
@@ -129,7 +129,7 @@ else {
             $deleteStmt->bindParam(':applicationId', $applicationId);
             $deleteStmt->execute();
 
-            $languages = $_POST['languages'];
+            $languages = $_POST['programming_languages'];
             foreach ($languages as $languageId) {
                 $insertStmt = $db->prepare("INSERT INTO info_language (info_id, language_id) VALUES (:applicationId, :languageId)");
                 $insertStmt->bindParam(':applicationId', $applicationId);
