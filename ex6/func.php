@@ -74,13 +74,13 @@ function Validation() {
     setcookie('date_value', $_POST['date'], time() + 30 * 24 * 60 * 60);
     $db = SetDataBaseConnection();
 
-    if (empty($_POST['languages'])) {
+    if (empty($_POST['programming_languages'])) {
         setcookie('languages_error', '1', time() + 24 * 60 * 60);
         $errors = TRUE;
     } else {
-        foreach ($_POST['languages'] as $language) {
+        foreach ($_POST['programming_languages'] as $programming_languages) {
             $stmt = $db->prepare("SELECT id FROM programming_languages WHERE id= :id");
-            $stmt->execute(array(':id' => $language));
+            $stmt->execute(array(':id' => $programming_languages));
             if ($stmt->rowCount() == 0) {
                 setcookie('languages_unknown', '1', time() + 24 * 60 * 60);
                 $errors = TRUE;
@@ -88,9 +88,9 @@ function Validation() {
         }
     }
 
-    if (!empty($_POST['languages'])) {
-        $languages = $_POST['languages'];
-        $languagesString = serialize($languages);
+    if (!empty($_POST['programming_languages'])) {
+        $languages = $_POST['programming_languages'];
+        $languagesString = serialize($programming_languages);
         setcookie('languages', $languagesString, time() + 3600, '/'); // cookie будет храниться 1 час
     }
     return $errors;
