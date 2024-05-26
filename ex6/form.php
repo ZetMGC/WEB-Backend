@@ -24,7 +24,7 @@ if (!empty($messages)) {
 <div class="form">
     <h2>Форма регистрации</h2>
 
-    <form action="<?php echo $action; ?>" method="post">
+    <form action="index.php" method="POST" accept-charset="UTF-8" class="login">
         <?php if (isset($_GET['id'])): ?>
             <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
         <?php endif; ?>
@@ -95,8 +95,8 @@ if (!empty($messages)) {
                 ознакомлен
             </label><br />
 
+            <input class="btn btn-outline-info" type="submit" value="Сохранить" />
             <div class="container">
-                <input class="btn btn-outline-info" type="submit" value="Сохранить" />
                 <?php include('log_btns.php'); ?>
             </div>
     </form>

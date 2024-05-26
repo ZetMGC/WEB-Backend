@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $values['gen'] = empty($_COOKIE['gen_value']) ? '' : $_COOKIE['gen_value'];
     $values['bio'] = empty($_COOKIE['bio_value']) ? '' : $_COOKIE['bio_value'];
     $values['date'] = empty($_COOKIE['date_value']) ? '' : $_COOKIE['date_value'];
-    $languages = isset($_COOKIE['languages']) ? unserialize($_COOKIE['languages']) : [];
+    $programming_languages = isset($_COOKIE['programming_languages']) ? unserialize($_COOKIE['programming_languages']) : [];
 
 
     session_start();
@@ -105,9 +105,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $stmt1->execute([$_SESSION['uid']]);
 
 
-            $languages = array();
+            $programming_languages = array();
             while ($row = $stmt1->fetch(PDO::FETCH_ASSOC)) {
-                $languages[] = $row['language_id'];
+                $programming_languages[] = $row['language_id'];
             }
 
 
@@ -161,8 +161,8 @@ else {
                 $deleteStmt = $db->prepare("DELETE FROM info_language WHERE info_id = :applicationId");
                 $deleteStmt->bindParam(':applicationId', $applicationId);
                 $deleteStmt->execute();
-                $languages = $_POST['languages'];
-                foreach ($languages as $languageId) {
+                $programming_languages = $_POST['programming_languages'];
+                foreach ($programming_languages as $languageId) {
                     $insertStmt = $db->prepare("INSERT INTO info_language (info_id, language_id) VALUES (:applicationId, :languageId)");
                     $insertStmt->bindParam(':applicationId', $applicationId);
                     $insertStmt->bindParam(':languageId', $languageId);
@@ -208,7 +208,7 @@ else {
             ));
             $applicationId = $db->lastInsertId();
 
-            foreach ($_POST['languages'] as $language) {
+            foreach ($_POST['programming_languages'] as $language) {
                 $stmt = $db->prepare("INSERT INTO info_language (info_id, language_id) VALUES (:info_id, :language_id)");
                 $stmt->bindParam(':info_id', $applicationId);
                 $stmt->bindParam(':language_id', $language);
