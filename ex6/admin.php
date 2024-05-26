@@ -59,10 +59,10 @@ if (!$admin || !password_verify($password, $admin['admin_pass'])) {
         </tr>
         <?php
 
-        $sql = "SELECT i.id, i.fio, i.tel, i.email, i.date, i.gender, i.bio, GROUP_CONCAT(l.title) AS languages
+        $sql = "SELECT i.id, i.fio, i.tel, i.email, i.date, i.gender, i.bio, GROUP_CONCAT(l.programming_language) AS programming_languages
                 FROM info i
                 LEFT JOIN info_language il ON i.id = il.info_id
-                LEFT JOIN languages l ON il.language_id = l.id GROUP BY i.id";
+                LEFT JOIN programming_languages l ON il.language_id = l.id GROUP BY i.id";
         $stmt = $db->query($sql);
 
 
@@ -76,7 +76,7 @@ if (!$admin || !password_verify($password, $admin['admin_pass'])) {
                 echo "<td>".$row["date"]."</td>";
                 echo "<td>".$row["gender"]."</td>";
                 echo "<td>".$row["bio"]."</td>";
-                echo "<td>".$row["languages"]."</td>";
+                echo "<td>".$row["programming_languages"]."</td>";
                 echo "<td><a href='edit.php?id=".$row["id"]."'>Изменить</a></td>";
                 echo "<td><a href='delete.php?id=".$row["id"]."'>Удалить</a></td>";
                 echo "</tr>";
