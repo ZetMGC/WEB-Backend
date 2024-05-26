@@ -1,4 +1,6 @@
 <?php
+
+include('config.php');
 function GetError() {
     $errors = array();
     $errors['fio'] = !empty($_COOKIE['fio_error']);
@@ -101,6 +103,11 @@ function SetDataBaseConnection() {
     return $db;
 }
 
-function StartSession() {
-
+function StartSession($login, $pass, $uid) {
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+    $_SESSION['login'] = $login;
+    $_SESSION['pass'] = $pass;
+    $_SESSION['uid'] = $uid;
 }

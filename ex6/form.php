@@ -24,46 +24,50 @@ if (!empty($messages)) {
 <div class="form">
     <h2>Форма регистрации</h2>
 
-    <form action="index.php" method="POST" accept-charset="UTF-8" class="login">
+    <form action="<?php echo $action; ?>" method="post">
+        <?php if (isset($_GET['id'])): ?>
+            <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
+        <?php endif; ?>
         <label>
-            ФИО:<br> <input name="fio"  class="form-control" <?php if ($errors['fio'] || $errors['symbolfio_error']) {
+            ФИО:<br> <input name="fio" <?php if ($errors['fio'] || $errors['symbolfio_error']) {
                 print 'class="error"';
             } ?> value="<?php print $values['fio']; ?>"> </label><br>
         <label>
             Номер телефона :<br />
-            <input name="tel"  class="form-control" <?php if ($errors['tel'] || $errors['symboltel_error']) {
+            <input name="tel" <?php if ($errors['tel'] || $errors['symboltel_error']) {
                 print 'class="error"';
             } ?> value="<?php print $values['tel']; ?>"> </label><br>
         <label>
             Email:<br />
-            <input name="email"  class="form-control" <?php if ($errors['email']) {
+            <input name="email" <?php if ($errors['email']) {
                 print 'class="error"';
             } ?> value="<?php print $values['email']; ?>" type="email">
         </label><br>
 
         <label>
             Дата рождения:<br />
-            <input name="date" class="form-control" <?php if ($errors['date']) {
+            <input name="date" <?php if ($errors['date']) {
                 print 'class="error"';
             } ?> value="<?php print $values['date']; ?>" type="date">
             <br>
             <br />
             <label>Пол:<br />
-                <input type="radio" class="form-control"  name="gen" <?php
+                <input type="radio"  name="gen" <?php
                 if ($errors['gen']) {print 'class="error"' ;}
                 if( $values['gen'] == 'm') {print "checked='checked'";}?> value="m">
-                муж</label>
+                муж
+            </label>
             <label>
-                <input type="radio"  class="form-control" name="gen" <?php
+                <input type="radio" name="gen" <?php
                 if ($errors['gen']) {print 'class="error"' ;}
                 if( $values['gen'] == 'f') {print "checked='checked'";}?> value="f">
-                жен</label><br>
+                жен
+            </label><br>
             </p>
             <label>
                 Любимый язык программирования:
                 <br>
-
-                <select name="languages[]" class="form-control" multiple="multiple" <?php if ($errors['languages_error']) {
+                <select name="languages[]" multiple="multiple" <?php if ($errors['languages_error']) {
                     print 'class="error"';
                 } ?>>
                     <option value="1" <?php echo is_array($languages) &&  in_array('1', $languages) ? 'selected' : ''; ?>>Java</option>
@@ -76,16 +80,20 @@ if (!empty($messages)) {
                     <option value="8" <?php echo is_array($languages) && in_array('8', $languages) ? 'selected' : ''; ?>>Go</option>
                     <option value="9" <?php echo is_array($languages) && in_array('9', $languages) ? 'selected' : ''; ?>>PHP</option>
                     <option value="10" <?php echo is_array($languages) && in_array('10', $languages) ? 'selected' : ''; ?>>Rust</option>
-                </select> </label><br />
+                </select>
+            </label><br />
 
             <label>
                 Биография:<br />
                 <textarea name="bio" class="form-control" <?php if ($errors['bio']) {
                     print 'class="error"';
-                } ?>><?php print $values['bio']; ?></textarea></label><br />
+                } ?>><?php print $values['bio']; ?>
+                </textarea>
+            </label><br />
 
             <label><input type="checkbox" name="check" required /> С контрактом
-                ознакомлен</label><br />
+                ознакомлен
+            </label><br />
 
             <div class="container">
                 <input class="btn btn-outline-info" type="submit" value="Сохранить" />
