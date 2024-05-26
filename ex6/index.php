@@ -96,8 +96,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             $values['fio'] =  strip_tags($row['fio']);
-            $values['email'] =  strip_tags($row['email']);
-            $values['tel'] =  strip_tags($row['tel']);
+            $values['email'] = strip_tags($row['email']);
+            $values['tel'] = strip_tags($row['tel']);
             $values['gen'] = $row['gender'];
             $values['bio'] = $row['bio'];
             $values['date'] = $row['date'];
