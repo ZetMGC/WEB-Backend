@@ -83,23 +83,23 @@ if (!$admin || !hash_equals($admin['admin_pass'], md5($password))) {
     </table>
 
     <?php
-    $sql = "SELECT l.programming_language AS language, COUNT(il.language_id) AS count_users
-            FROM programming_languages l
-            LEFT JOIN info_language il ON l.id = il.language_id
-            GROUP BY l.programming_language";
+        $sql = "SELECT l.programming_language AS language, COUNT(il.language_id) AS count_users
+                FROM programming_languages l
+                LEFT JOIN info_language il ON l.id = il.language_id
+                GROUP BY l.programming_language";
 
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
 
-    echo "<h2>Статистика :</h2>";
-    echo "<table class='table table-bordered'>";
-    echo "<thead><tr><th>Язык программирования</th><th>Количество пользователей</th></tr></thead>";
-    echo "<tbody>";
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        echo "<tr><td>{$row['language']}</td><td>{$row['count_users']}</td></tr>";
-    }
-    echo "</tbody>";
-    echo "</table>";
+        echo "<h2>Статистика :</h2>";
+        echo "<table class='table table-bordered'>";
+        echo "<thead><tr><th>Язык программирования</th><th>Количество пользователей</th></tr></thead>";
+        echo "<tbody>";
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            echo "<tr><td>{$row['language']}</td><td>{$row['count_users']}</td></tr>";
+        }
+        echo "</tbody>";
+        echo "</table>";
     ?>
 </div>
 </body>

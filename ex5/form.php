@@ -28,7 +28,8 @@ if (!empty($messages)) {
         <label>
             ФИО:<br> <input name="fio"  class="form-control" <?php if ($errors['fio'] || $errors['symbolfio_error']) {
                 print 'class="error"';
-            } ?> value="<?php print $values['fio']; ?>"> </label><br>
+            } ?> value="<?php print $values['fio']; ?>">
+        </label><br>
         <label>
             Номер телефона :<br />
             <input name="tel"  class="form-control" <?php if ($errors['tel'] || $errors['symboltel_error']) {

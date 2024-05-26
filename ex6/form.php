@@ -67,19 +67,19 @@ if (!empty($messages)) {
             <label>
                 Любимый язык программирования:
                 <br>
-                <select name="languages[]" multiple="multiple" <?php if ($errors['languages_error']) {
+                <select name="programming_languages[]" multiple="multiple" <?php if ($errors['languages_error']) {
                     print 'class="error"';
                 } ?>>
-                    <option value="1" <?php echo is_array($languages) &&  in_array('1', $languages) ? 'selected' : ''; ?>>Java</option>
-                    <option value="2" <?php echo is_array($languages) && in_array('2', $languages) ? 'selected' : ''; ?> >Python</option>
-                    <option value="3" <?php echo is_array($languages) && in_array('3', $languages) ? 'selected' : ''; ?>>JavaScript</option>
-                    <option value="4" <?php echo is_array($languages) && in_array('4', $languages) ? 'selected' : ''; ?>>C++</option>
-                    <option value="5" <?php echo is_array($languages) && in_array('5', $languages) ? 'selected' : ''; ?>>C#</option>
-                    <option value="6" <?php echo  is_array($languages) &&in_array('6', $languages) ? 'selected' : ''; ?>>Ruby</option>
-                    <option value="7" <?php echo is_array($languages) && in_array('7', $languages) ? 'selected' : ''; ?>>Swift</option>
-                    <option value="8" <?php echo is_array($languages) && in_array('8', $languages) ? 'selected' : ''; ?>>Go</option>
-                    <option value="9" <?php echo is_array($languages) && in_array('9', $languages) ? 'selected' : ''; ?>>PHP</option>
-                    <option value="10" <?php echo is_array($languages) && in_array('10', $languages) ? 'selected' : ''; ?>>Rust</option>
+                    <option value="1" <?php echo is_array($programming_languages) &&  in_array('1', $programming_languages) ? 'selected' : ''; ?>>Java</option>
+                    <option value="2" <?php echo is_array($programming_languages) && in_array('2', $programming_languages) ? 'selected' : ''; ?> >Python</option>
+                    <option value="3" <?php echo is_array($programming_languages) && in_array('3', $programming_languages) ? 'selected' : ''; ?>>JavaScript</option>
+                    <option value="4" <?php echo is_array($programming_languages) && in_array('4', $programming_languages) ? 'selected' : ''; ?>>C++</option>
+                    <option value="5" <?php echo is_array($programming_languages) && in_array('5', $programming_languages) ? 'selected' : ''; ?>>C#</option>
+                    <option value="6" <?php echo is_array($programming_languages) &&in_array('6', $programming_languages) ? 'selected' : ''; ?>>Ruby</option>
+                    <option value="7" <?php echo is_array($programming_languages) && in_array('7', $programming_languages) ? 'selected' : ''; ?>>Swift</option>
+                    <option value="8" <?php echo is_array($programming_languages) && in_array('8', $programming_languages) ? 'selected' : ''; ?>>Go</option>
+                    <option value="9" <?php echo is_array($programming_languages) && in_array('9', $programming_languages) ? 'selected' : ''; ?>>PHP</option>
+                    <option value="10" <?php echo is_array($programming_languages) && in_array('10', $programming_languages) ? 'selected' : ''; ?>>Rust</option>
                 </select>
             </label><br />
 
@@ -95,8 +95,8 @@ if (!empty($messages)) {
                 ознакомлен
             </label><br />
 
-            <input class="btn btn-outline-info" type="submit" value="Сохранить" />
             <div class="container">
+                <input class="btn btn-outline-info" type="submit" value="Сохранить" />
                 <?php include('log_btns.php'); ?>
             </div>
     </form>
