@@ -26,20 +26,20 @@ if (!empty($messages)) {
 
     <form action="index.php" method="POST" accept-charset="UTF-8" class="login">
         <?php if (isset($_GET['id'])): ?>
-            <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
+            <input  type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
         <?php endif; ?>
         <label>
-            ФИО:<br> <input name="fio" <?php if ($errors['fio'] || $errors['symbolfio_error']) {
+            ФИО:<br> <input class="form-control" name="fio" <?php if ($errors['fio'] || $errors['symbolfio_error']) {
                 print 'class="error"';
             } ?> value="<?php print $values['fio']; ?>"> </label><br>
         <label>
             Номер телефона :<br />
-            <input name="tel" <?php if ($errors['tel'] || $errors['symboltel_error']) {
+            <input class="form-control" name="tel" <?php if ($errors['tel'] || $errors['symboltel_error']) {
                 print 'class="error"';
             } ?> value="<?php print $values['tel']; ?>"> </label><br>
         <label>
             Email:<br />
-            <input name="email" <?php if ($errors['email']) {
+            <input class="form-control" name="email" <?php if ($errors['email']) {
                 print 'class="error"';
             } ?> value="<?php print $values['email']; ?>" type="email">
         </label><br>
@@ -50,8 +50,9 @@ if (!empty($messages)) {
                 print 'class="error"';
             } ?> value="<?php print $values['date']; ?>" type="date">
             <br>
-            <br />
-            <label>Пол:<br />
+        </label>
+        <br/>
+            <label>Пол:<br/>
                 <input type="radio"  name="gen" <?php
                 if ($errors['gen']) {print 'class="error"' ;}
                 if( $values['gen'] == 'm') {print "checked='checked'";}?> value="m">
@@ -95,9 +96,8 @@ if (!empty($messages)) {
                 ознакомлен
             </label><br />
 
-            <div class="container">
-                <input class="btn btn-outline-info" type="submit" value="Сохранить" />
-                <?php include('log_btns.php'); ?>
+            <div class="">
+                <input class="btn btn-success" type="submit" value="Сохранить" /> <?php include('log_btns.php'); ?>
             </div>
     </form>
 </div>

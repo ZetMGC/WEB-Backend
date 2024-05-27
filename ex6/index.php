@@ -21,56 +21,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     }
 
     $errors = GetError();
+    $errorMessages = [
+        'fio' => 'Заполните имя.',
+        'email' => 'Заполните почту.',
+        'bio' => 'Заполните биографию.',
+        'tel' => 'Заполните номер телефона.',
+        'date' => 'Заполните дату.',
+        'gen' => 'Введите пол.',
+        'symbolfio_error' => 'ФИО содержит недопустимые символы.',
+        'symboltel_error' => 'Укажите номер телефона в формате +7 (XXX) XXX-XX-XX.',
+        'languages_error' => 'Выберите языки.',
+        'languages_unknown' => 'Ошибка при добавлении языка.',
+        'date_value_error' => 'Заполните дату в формате d.m.Y.',
+        'bio_value_error' => 'Биография содержит недопустимые символы.',
+    ];
 
-    if ($errors['fio']) {
-        setcookie('fio_error', '', 100000);
-        $messages[] = '<div class="error">Заполните имя.</div>';
-    }
-    if ($errors['email']) {
-        setcookie('email_error', '', 100000);
-        $messages[] = '<div class="error">Заполните почту.</div>';
-    }
-
-    if ($errors['bio']) {
-        setcookie('bio_error', '', 100000);
-        $messages[] = '<div class="error">Заполните биографию.</div>';
-    }
-    if ($errors['tel']) {
-        setcookie('tel_error', '', 100000);
-        $messages[] = '<div class="error">Заполните номер телефона.</div>';
-    }
-    if ($errors['date']) {
-        setcookie('date_error', '', 100000);
-        $messages[] = '<div class="error">Заполните дату.</div>';
-    }
-    if ($errors['gen']) {
-        setcookie('gen_error', '', 100000);
-        $messages[] = '<div class="error">Введите пол</div>';
-    }
-    if ($errors['symbolfio_error']) {
-        setcookie('symbolfio_error', '', 100000);
-        $messages[] = '<div class="error">ФИО содержит недопустимые символы.</div>';
-    }
-
-    if ($errors['symboltel_error']) {
-        setcookie('symboltel_error', '', 100000);
-        $messages[] = '<div class="error">Укажите номер телефона в формате +7 (XXX) XXX-XX-XX.</div>';
-    }
-    if ($errors['languages_error']) {
-        setcookie('languages_error', '', 100000);
-        $messages[] = '<div class="error">Выберите языки.</div>';
-    }
-    if ($errors['languages_unknown']) {
-        setcookie('languages_unknown', '', 100000);
-        $messages[] = '<div class="error">Ошибка при добавлении языка.</div>';
-    }
-    if ($errors['date_value_error']) {
-        setcookie('date_value_error', '', 100000);
-        $messages[] = '<div class="error">Заполните дату в формате d.m.Y.</div>';
-    }
-    if ($errors['bio_value_error']) {
-        setcookie('bio_value_error', '', 100000);
-        $messages[] = '<div class="error">Биография содержит недопустимые символы.</div>';
+    foreach ($errors as $key => $error) {
+        if ($error) {
+            setcookie("{$key}_error", '', 100000);
+            $messages[] = '<div class="error">' . $errorMessages[$key] . '</div>';
+        }
     }
 
     // Складываем предыдущие значения полей в массив, если есть.

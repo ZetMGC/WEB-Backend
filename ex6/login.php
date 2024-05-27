@@ -1,7 +1,6 @@
 <?php
 include ('func.php');
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Отображение формы входа
     ?>
@@ -17,8 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <div class="form">
         <h2>Форма входа</h2>
         <form action="" method="POST" accept-charset="UTF-8" class="login">
-            <input name="login" />
-            <input name="pass" />
+            <input class="form-control" name="login" />
+            <input class="form-control" name="pass" />
             <input type="submit" value="Войти" />
         </form>
     </div>
