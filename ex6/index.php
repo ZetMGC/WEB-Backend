@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         'date' => 'Заполните дату.',
         'gen' => 'Введите пол.',
         'symbolfio_error' => 'ФИО содержит недопустимые символы.',
-        'symboltel_error' => 'Укажите номер телефона в формате +7 (XXX) XXX-XX-XX.',
+        'symboltel_error' => 'Укажите номер телефона в формате +7XXXXXXXXXX.',
         'languages_error' => 'Выберите языки.',
         'languages_unknown' => 'Ошибка при добавлении языка.',
         'date_value_error' => 'Заполните дату в формате d.m.Y.',
