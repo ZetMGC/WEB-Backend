@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
     if ($errors['symboltel_error']) {
         setcookie('symboltel_error', '', 100000);
-        $messages[] = '<div class="error">Укажите номер телефона в формате +7 (XXX) XXX-XX-XX.</div>';
+        $messages[] = '<div class="error">Укажите номер телефона в формате +7XXXXXXXXXX.</div>';
     }
     if ($errors['languages_error']) {
         setcookie('languages_error', '', 100000);
